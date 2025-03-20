@@ -4,3 +4,6 @@
 [submodule "ReactNative"]
 	path = ReactNative
 	url = https://github.com/RocketChat/Rocket.Chat.ReactNative.git
+[submodule "zulip"]
+	path = zulip
+	url = https://github.com/zulip/zulip-mobile.git
