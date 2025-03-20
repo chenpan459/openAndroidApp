@@ -1,3 +1,6 @@
 [submodule "NewPipe"]
 	path = NewPipe
 	url = https://github.com/TeamNewPipe/NewPipe.git
+[submodule "ReactNative"]
+	path = ReactNative
+	url = https://github.com/RocketChat/Rocket.Chat.ReactNative.git
