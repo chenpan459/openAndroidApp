@@ -1,0 +1,69 @@
+以下是一套完整的 Android 应用的 build.gradle 模板（适用于 app 模块），其中包含了常用的 release 和 debug 配置、签名配置、混淆配置等，适合用于正式发布 APK。
+
+app/build.gradle
+proguard-rules.pro
+
+
+
+
+keystore 文件结构建议：
+project-root/
+│
+├── app/
+│   ├── build.gradle
+│   └── keystore/
+│       └── release.jks
+├── proguard-rules.pro
+└── settings.gradle
+
+
+在 Android 的 build.gradle 文件中配置 release 构建类型（build type）时，结构一般如下：
+android {
+    ...
+    buildTypes {
+        release {
+            // 是否进行代码混淆（ProGuard 或 R8）
+            minifyEnabled true
+            
+            // 使用的混淆配置文件（通常在项目中已有）
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // 是否启用资源压缩（去除无用资源）
+            shrinkResources true
+
+            // 可选：是否启用调试模式（release 通常设为 false）
+            debuggable false
+
+            // 可选：指定签名配置（需要设置签名信息）
+            signingConfig signingConfigs.release
+        }
+    }
+
+    // 可选签名配置（你要发布APK必须配置）
+    signingConfigs {
+        release {
+            keyAlias 'yourKeyAlias'
+            keyPassword 'yourKeyPassword'
+            storeFile file('your_keystore_file.jks')
+            storePassword 'yourStorePassword'
+        }
+    }
+}
+
+常见参数说明
+| 参数                | 作用说明                        |
+| ----------------- | --------------------------- |
+| `minifyEnabled`   | 启用混淆（压缩代码）                  |
+| `proguardFiles`   | 设置混淆规则文件                    |
+| `shrinkResources` | 删除无用资源（如未使用的图片）             |
+| `debuggable`      | 是否启用调试（Release版本应设为false）   |
+| `signingConfig`   | 指定签名配置，用于生成可安装的 release APK |
+
+
+在 Android Studio 中，如果你点击 Build > Build Project，默认编译的是 Debug 版本（即 buildTypes.debug）。如果你想编译并生成 Release 版本，有以下几种方式可以选择：
+方法一：使用 Build APK(s) 生成 Release APK
+步骤：
+    点击顶部菜单栏：Build > Build Bundle(s) / APK(s) > Build APK(s)
+    Android Studio 会提示你选择 debug 或 release。
+    等待编译完成后，会在底部弹窗显示 APK 所在路径，通常在：
+    app/build/outputs/apk/release/app-release.apk

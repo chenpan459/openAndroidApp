@@ -1,0 +1,36 @@
+
+
+在 Activity 或 Fragment 中添加如下代码
+ExpandableListView expandableListView = findViewById(R.id.expandableListView);
+
+// 初始化数据
+List<String> groupList = Arrays.asList("国家", "城市");
+Map<String, List<String>> childMap = new HashMap<>();
+childMap.put("国家", Arrays.asList("中国", "美国", "法国"));
+childMap.put("城市", Arrays.asList("北京", "纽约", "巴黎"));
+
+// 设置适配器
+MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, groupList, childMap);
+expandableListView.setAdapter(adapter);
+
+// ✅ 默认展开所有组
+int groupCount = adapter.getGroupCount();
+for (int i = 0; i < groupCount; i++) {
+    expandableListView.expandGroup(i);
+}
+
+再加上这一句，禁止用户点击收起组：
+expandableListView.setOnGroupClickListener((parent, v, groupPosition, id) -> true);
+
+
+
+
+
+ layout 文件示例
+<!-- res/layout/activity_main.xml -->
+<ExpandableListView
+    android:id="@+id/expandableListView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+
