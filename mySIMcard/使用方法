@@ -1,0 +1,21 @@
+
+
+1、 apksigner（Android SDK Build Tools 附带）
+
+    找到你的 Android SDK 目录
+
+    路径示例（Linux/Mac）：
+
+$ANDROID_SDK/build-tools/<version>/apksigner verify --print-certs app-release.apk
+
+
+C:\cp4119\AndroidStudioProjects\card\app\release>C:\cp4119\androidTools\sdk\build-tools\36.0.0\apksigner.bat   verify --print-certs app-release.apk
+Signer #1 certificate DN: CN=by
+Signer #1 certificate SHA-256 digest: dd6e5037af371c5e719c2c06de8b045442ab38f0776bcbb232d729edc74ad74f
+Signer #1 certificate SHA-1 digest: 378415708277814fc1190d9fec2a23c006f2bff0
+Signer #1 certificate MD5 digest: b14d19082662aef5e575816b3ad07150
+C:\cp4119\AndroidStudioProjects\card\app\release>
+
+
+
+指令不对 APDU command那里要输入 B01C00 00 14 再加上sha1值
